@@ -40,7 +40,6 @@ export const cartReducer = (state = initialState, action) => {
 
         case "GET_USER_CART_PRODUCTS":
 
-            // console.log("Cart payload:", action.payload);
 
             return {
                 ...state,

@@ -30,7 +30,6 @@ const useProductFilter = () => {
             params.set("keyword", keyword);
 
         const queryString = params.toString();
-        console.log(queryString);
 
         dispatch(fetchProducts(queryString));
     },[searchParams, dispatch]);

@@ -33,7 +33,6 @@ const useOrderFilter = () => {
             params.set("keyword", keyword);
 
         const queryString = params.toString();
-        console.log(queryString);
 
         dispatch(getOrdersForDashboard(queryString, isAdmin));
     }, [searchParams, dispatch, isAdmin]);

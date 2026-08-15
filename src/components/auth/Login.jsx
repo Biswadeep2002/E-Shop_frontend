@@ -22,7 +22,7 @@ const Login = () => {
     });
 
     const loginHandler = async (data) => {
-        console.log("Login Click");
+  
         dispatch(
             authenticateSignedInUser(
                 data,
@@ -64,12 +64,12 @@ const Login = () => {
                         <div className="bg-white rounded-lg p-4 border">
                             <p className="mb-2">
                                 <span className="font-semibold">Username:</span>{" "}
-                                admin
+                                user1
                             </p>
 
                             <p>
                                 <span className="font-semibold">Password:</span>{" "}
-                                admin123
+                                1111
                             </p>
                         </div>
                     </div>
@@ -165,7 +165,7 @@ const Login = () => {
 
                             <p>
                                 <span className="font-semibold">Password:</span>{" "}
-                                seller123
+                                seller
                             </p>
                         </div>
                     </div>

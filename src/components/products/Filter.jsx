@@ -4,7 +4,6 @@ import { Button, FormControl, IconButton, InputLabel, MenuItem, Select, Tooltip 
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const Filter = ({ categories }) => {
-    console.log("From filter class", categories);
 
     const [searchParams] = useSearchParams();
     const pathName = useLocation().pathname;

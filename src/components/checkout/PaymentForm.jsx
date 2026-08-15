@@ -39,9 +39,7 @@ const handleSubmit = async (e) => {
   return (
     <form onSubmit={handleSubmit} className='max-w-lg mx-auto p-4'>
         <h2 className='text-xl font-semibold mb-4'>Payment Information</h2>
-        {console.log("clientSecret is", clientSecret)}
-        {console.log("Stripe is", stripe)}
-        {console.log("Elements is", elements)}
+    
         {isLoading ? 
         (
             <SkeletonAnimation/>

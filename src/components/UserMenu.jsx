@@ -183,7 +183,7 @@ const UserMenu = () => {
             onClick={handleClose}>
             <FaShoppingCart className="text-xl" />
             <span className="font-semibold">
-              Orders
+              My Orders
             </span>
           </MenuItem>
         </Link>
