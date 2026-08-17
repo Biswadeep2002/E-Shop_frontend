@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-import InputField from "../../shared/InputField";
+import InputField from "../../Shared/InputField";
 import { createCategoryDashboardAction, updateCategoryDashboardAction } from "../../../store/action";
 
 const AddCategoryForm = ({ setOpen, open, category, update = false }) => {
