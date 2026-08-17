@@ -5,9 +5,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import { FaFolderOpen, FaThList } from "react-icons/fa";
 import toast from "react-hot-toast";
 
-import Modal from "../../shared/Modal";
+import Modal from "../../Shared/Modal";
 import AddCategoryForm from "./AddCategoryForm";
-import Loader from "../../shared/Loader";
+import Loader from "../../Shared/Loader";
 import { DeleteModal } from "../../../components/Shared/DeleteModal";
 import useCategoryFilter from "../../../hooks/useCategoryFilter";
 import ErrorPage from "../../Shared/ErrorPage";
