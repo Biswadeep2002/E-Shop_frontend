@@ -1,6 +1,6 @@
 import { MdAddShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../shared/Loader";
+import Loader from "../../Shared/Loader";
 import { FaBoxOpen } from "react-icons/fa";
 import { adminProductTableColumns } from "../../helper/tableColumns";
 import { useState } from "react";

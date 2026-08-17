@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import InputField from "../../shared/InputField";
+import InputField from "../../Shared/InputField";
 // import Loader from "../../shared/Loader";
 import { addNewDashboardSeller } from "../../../store/action";
-import Loader from "../../shared/Loader";
+import Loader from "../../Shared/Loader";
 
 const AddSellerForm = ({ setOpen }) => {
   const dispatch = useDispatch();

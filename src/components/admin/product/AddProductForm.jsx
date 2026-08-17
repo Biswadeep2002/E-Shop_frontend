@@ -2,7 +2,7 @@
   import { useForm } from 'react-hook-form';
   import InputField from '../../Shared/InputField';
   import { Button } from '@mui/material';
-  import Loader from '../../shared/Loader';
+  import Loader from '../../Shared/Loader';
   import { useDispatch, useSelector } from 'react-redux';
   import { addNewProductFromDashboard, fetchCategories, updateOrderStatusFromDashboard, updateProductFromDashboard } from '../../../store/action';
   import toast from 'react-hot-toast';

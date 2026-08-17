@@ -8,9 +8,9 @@ import toast from "react-hot-toast";
 import Modal from "../../shared/Modal";
 import AddCategoryForm from "./AddCategoryForm";
 import Loader from "../../shared/Loader";
-import { DeleteModal } from "../../../components/shared/DeleteModal";
+import { DeleteModal } from "../../../components/Shared/DeleteModal";
 import useCategoryFilter from "../../../hooks/useCategoryFilter";
-import ErrorPage from "../../shared/ErrorPage";
+import ErrorPage from "../../Shared/ErrorPage";
 import { deleteCategoryDashboardAction } from "../../../store/action";
 import { categoryTableColumns } from "../../helper/tableColumns";
 

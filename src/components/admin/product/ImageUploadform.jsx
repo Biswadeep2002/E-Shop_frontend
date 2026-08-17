@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React, { useRef, useState } from 'react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
-import Loader from '../../shared/Loader';
+import Loader from '../../Shared/Loader';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { updateProductImageFromDashboard } from '../../../store/action';
