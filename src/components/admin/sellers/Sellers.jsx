@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { MdPersonAdd } from "react-icons/md";
 import useSellerFilter from "./UseSellerFilter";
 import ErrorPage from "../../Shared/ErrorPage";
-import Loader from "../../shared/Loader";
+import Loader from "../../Shared/Loader";
 import SellerTable from "./SellerTable";
 import AddSellerForm from "./AddSellerForm";
 import Modal from "../../Shared/Modal";
