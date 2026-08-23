@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiShield, FiStar, FiTruck } from "react-icons/fi";
 import ProductCard from "./Shared/ProductCard";
 import { fetchProducts } from "../store/action";
+import Loader from "./Shared/Loader";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 const About = () => {
   const dispatch = useDispatch();
@@ -171,16 +173,23 @@ const About = () => {
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {isLoading ? (
             <p className="text-sm text-slate-600 md:col-span-2 xl:col-span-3">
-              Loading featured products...
+              <Loader />
             </p>
           ) : errorMessage ? (
-            <p className="text-sm text-slate-600 md:col-span-2 xl:col-span-3">
-              Unable to load featured products right now.
-            </p>
+            <div className="flex justify-center items-center h-[200px]">
+              <FaExclamationTriangle className="text-slate-800 text-3x1 mr-2" />
+              <span className="text-slate-800 text-lg font-medium">
+                Unable to load featured products right now.
+              </span>
+            </div>
+            // <p className="text-sm text-slate-600 md:col-span-2 xl:col-span-3">
+            //   Unable to load featured products right now.
+            // </p>
           ) : featuredProducts.length > 0 ? (
             featuredProducts.map((product, index) => (
               <ProductCard
                 key={product?.productId ?? index}
+                productId={product.productId}
                 productName={product.productName}
                 image={product.image}
                 description={product.description}

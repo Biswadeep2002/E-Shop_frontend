@@ -32,7 +32,7 @@ export const fetchProducts = (queryString) => async (dispatch) => {
             payload: error?.message,
         })
 
-    
+
     }
 };
 
@@ -72,6 +72,13 @@ export const fetchCategories = (queryString) => async (dispatch) => {
 
 export const addToCart = (data, qty = 1, toast) =>
     (dispatch, getState) => {
+        const { user } = getState().auth;
+
+        if (!user) {
+            toast.error("Kindly login first");
+            return;
+        }
+
         const { products } = getState().products;
         const getProduct = products.find((item) => item.productId === data.productId);
 
@@ -356,7 +363,7 @@ export const getUserCart = () => async (dispatch, getState) => {
         });
         const { data } = await api.get(`/auth/cart/users/getCartById`);
 
-     
+
 
         const cartItems = Array.isArray(data.products)
             ? data.products
@@ -401,12 +408,12 @@ export const createStripePaymentSecret =
 
 export const stripePaymentConfirmation =
     (sendData, setErrorMessage, setLoading, toast) => async (dispatch, getState) => {
-       
+
 
         try {
             setLoading(true);
             const response = await api.post(`/auth/order/users/payments/${sendData.paymentMethod}`, sendData);
-           
+
             if (response.data) {
 
                 localStorage.removeItem("CHECKOUT_ADDRESS");
@@ -498,7 +505,7 @@ export const getUserOrders = () => async (dispatch) => {
     } catch (error) {
         if (requestId !== latestUserOrdersRequestId) return;
 
-        
+
         dispatch({
             type: "GET_USER_ORDERS_ERROR",
             payload: error?.response?.data?.message || "Failed to fetch user orders",
@@ -517,7 +524,7 @@ export const dashboardProductAction = (queryString, isAdmin) => async (dispatch)
             validateStatus: () => true,
         });
 
-        
+
 
         dispatch({
             type: "FETCH_PRODUCTS",
@@ -536,7 +543,7 @@ export const dashboardProductAction = (queryString, isAdmin) => async (dispatch)
             type: "IS_ERROR",
             payload: error?.response?.data?.message || "Failed to fetch dashboard products",
         })
-      
+
     }
 };
 
@@ -551,7 +558,7 @@ export const updateProductFromDashboard =
             setOpen(false);
             await dispatch(dashboardProductAction());
         } catch (error) {
-            
+
             toast.error(error?.response?.data?.description || "Product Update Failed");
         }
     };
@@ -567,7 +574,7 @@ export const deleteProduct =
             setLoader(false);
             setOpenDeleteModal(false);
         } catch (error) {
-            
+
             toast.error(
                 error?.response?.data?.message || "Some error occured"
             );
@@ -585,7 +592,7 @@ export const updateProductImageFromDashboard =
             setOpen(false);
             await dispatch(dashboardProductAction());
         } catch (error) {
-           
+
             toast.error(error?.response?.data?.description || "Product Image Update Failed");
         }
     };
