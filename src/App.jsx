@@ -22,50 +22,59 @@ import Orders from './components/admin/orders/Orders';
 import UserOrders from './components/Profile/UserOrders';
 import UserProfile from './components/Profile/UserProfile';
 import SellerPanel from './components/admin/seller/SellerPanel';
+import { ServerStatusProvider } from './context/ServerStatusContext';
+import ServerWakeupBanner from './components/Shared/ServerWakeupBanner';
 
 function App() {
 
   return (
     <React.Fragment>
-      <Router>
-        <div className="app-shell">
-          <Navbar />
-          <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/products' element={<Products />} />
-          <Route path='/cart' element={<Cart />} />
-          
-          <Route path='/' element = {<PrivateRoute publicPage/>}>
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-          </Route>
 
-          <Route path='/' element = {<PrivateRoute/>}>
-            <Route path='/checkout' element={<Checkout />} />
-            <Route path='/order-confirm' element={<PaymentConfirmation />} />
-            <Route path='/profile' element={<UserProfile />} />
-            <Route path='/profile/orders' element={<UserOrders />} />
-          </Route>
+      <ServerStatusProvider>
 
-          <Route path='/' element = {<PrivateRoute sellerOnly/>}>
-            <Route path='/admin/seller' element={<SellerPanel />} />
-          </Route>
+        <ServerWakeupBanner />
+        <Router>
+          <div className="app-shell">
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path='/products' element={<Products />} />
+              <Route path='/cart' element={<Cart />} />
 
-          <Route path='/' element = {<PrivateRoute adminOnly/>}>
-            <Route path='/admin' element={<AdminLayout/>}>
-              <Route path='' element={<Dashboard/>}/>
-              <Route path='products' element={<AdminProduct/>}/>
-              <Route path='categories' element={<Category/>}/>
-              <Route path='orders' element={<Orders/>}/>
-              <Route path='sellers' element={<Sellers/>}/>
-            </Route>
-          </Route>
+              <Route path='/' element={<PrivateRoute publicPage />}>
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+              </Route>
 
-          </Routes>
-        </div>
-      </Router>
+              <Route path='/' element={<PrivateRoute />}>
+                <Route path='/checkout' element={<Checkout />} />
+                <Route path='/order-confirm' element={<PaymentConfirmation />} />
+                <Route path='/profile' element={<UserProfile />} />
+                <Route path='/profile/orders' element={<UserOrders />} />
+              </Route>
+
+              <Route path='/' element={<PrivateRoute sellerOnly />}>
+                <Route path='/admin/seller' element={<SellerPanel />} />
+              </Route>
+
+              <Route path='/' element={<PrivateRoute adminOnly />}>
+                <Route path='/admin' element={<AdminLayout />}>
+                  <Route path='' element={<Dashboard />} />
+                  <Route path='products' element={<AdminProduct />} />
+                  <Route path='categories' element={<Category />} />
+                  <Route path='orders' element={<Orders />} />
+                  <Route path='sellers' element={<Sellers />} />
+                </Route>
+              </Route>
+
+            </Routes>
+          </div>
+        </Router>
+
+      </ServerStatusProvider>
+
       <Toaster position='bottom-center' />
     </React.Fragment>
   )
