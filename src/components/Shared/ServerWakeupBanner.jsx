@@ -107,7 +107,7 @@ const ServerWakeupBanner = () => {
           <p className="text-base text-slate-600 mt-2 leading-relaxed">
             This Project is hosted on Render's free tier, so the first
             request after inactivity may take a little longer.
-            Please wait a moment while the server starts up.
+            Please wait for a moment, some requests may take a little longer while the application becomes ready.".
           </p>
         </div>
 
