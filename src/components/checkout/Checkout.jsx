@@ -9,13 +9,13 @@ import ErrorPage from '../Shared/ErrorPage';
 import PaymentMethod from './PaymentMethod';
 import OrderSummary from './OrderSummary';
 import StripePayment from './StripePayment';
-import PaypalPayment from './PaypalPayment';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, errorMessage } = useSelector((state) => state.errors);
+  const { isLoading, checkoutLoading, errorMessage } =
+    useSelector((state) => state.errors);
   const { cart, totalPrice } = useSelector((state) => state.carts);
 
   const { address, selectedUserCheckoutAddress } = useSelector((state) => state.auth);
@@ -23,6 +23,8 @@ const Checkout = () => {
 
   const [activeStep, setActiveStep] = useState(0);
   const [showPaypalModal, setShowPaypalModal] = useState(false);
+
+
 
   const calculatedTotal = cart.reduce(
     (acc, item) =>
@@ -41,13 +43,22 @@ const Checkout = () => {
     setActiveStep((prevStep) => prevStep - 1);
   };
 
+
   const handleNext = () => {
     if (activeStep === 0 && !selectedUserCheckoutAddress) {
       toast.error('Please select checkout address before proceeding');
       return;
     }
 
-    if (activeStep === 1 && (!selectedUserCheckoutAddress || !paymentMethod)) {
+    if (activeStep === 1 && checkoutLoading) {
+      toast.error('Please wait while your cart is being synchronized');
+      return;
+    }
+
+    if (
+      activeStep === 1 &&
+      (!selectedUserCheckoutAddress || !paymentMethod)
+    ) {
       toast.error('Please select a payment method before proceeding');
       return;
     }
@@ -59,7 +70,6 @@ const Checkout = () => {
 
   useEffect(() => {
     dispatch(getUserAddressess());
-    // dispatch(getUserCart());
   }, [dispatch]);
 
   useEffect(() => {
@@ -115,6 +125,7 @@ const Checkout = () => {
           ) : (
             <div className="mt-2">
               {activeStep === 0 && <AddressInfo address={address} />}
+
               {activeStep === 1 && <PaymentMethod />}
               {activeStep === 2 && (
 
@@ -179,27 +190,41 @@ const Checkout = () => {
           </Button>
 
           {activeStep !== steps.length - 1 && (
+      
             <button
               disabled={
                 errorMessage ||
-                (activeStep === 0 ? !selectedUserCheckoutAddress : activeStep === 1 ? !paymentMethod : false)
+                checkoutLoading ||
+                (activeStep === 0
+                  ? !selectedUserCheckoutAddress
+                  : activeStep === 1
+                    ? !paymentMethod
+                    : false)
               }
-              className={`rounded-full px-5 py-2.5 font-semibold text-slate-900 transition ${errorMessage ||
-                (activeStep === 0 && !selectedUserCheckoutAddress) ||
-                (activeStep === 1 && !paymentMethod)
-                ? 'cursor-not-allowed bg-slate-200 text-slate-500'
-                : 'bg-white hover:bg-[#efe7d8]'
+              className={`px-6 py-3 rounded-lg font-medium transition-all ${errorMessage ||
+                  checkoutLoading ||
+                  (activeStep === 0 && !selectedUserCheckoutAddress) ||
+                  (activeStep === 1 && !paymentMethod)
+                  ? "cursor-not-allowed bg-slate-200 text-slate-500"
+                  : "bg-white hover:bg-[#efe7d8]"
                 }`}
               onClick={handleNext}
             >
-              Proceed
+              {checkoutLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="h-5 w-5 animate-spin rounded-full border-2 border-slate-400 border-t-transparent"></div>
+                  <span>Syncing cart...</span>
+                </div>
+              ) : (
+                "Proceed"
+              )}
             </button>
           )}
         </div>
       </div>
 
       {errorMessage && <ErrorPage message={errorMessage} />}
-    </div>
+    </div >
   );
 };
 

@@ -20,21 +20,29 @@ const paymentOptions = [
 ];
 
 const PaymentMethod = () => {
+
   const dispatch = useDispatch();
   const { paymentMethod } = useSelector((state) => state.payment);
-  const { cart, cartId } = useSelector((state) => state.carts);
-  const { errorMessage } = useSelector((state) => state.errors);
+  const { cart } = useSelector((state) => state.carts);
+  const {  errorMessage } = useSelector((state) => state.errors);
 
-  useEffect(() => {
-    if (cart.length > 0 && !cartId && !errorMessage) {
-      const sendCartItems = cart.map((item) => ({
-        productId: item.productId,
-        quantity: item.quantity,
-      }));
+  
+useEffect(() => {
+    const syncCart = async () => {
+        if (cart.length === 0 || errorMessage) {
+            return;
+        }
 
-      dispatch(createUserCart(sendCartItems));
-    }
-  }, [dispatch, cart, cartId, errorMessage]);
+        const sendCartItems = cart.map((item) => ({
+            productId: item.productId,
+            quantity: item.quantity,
+        }));
+
+        await dispatch(createUserCart(sendCartItems));
+    };
+
+    syncCart();
+}, []);
 
   const paymentMethodHandler = (method) => {
     dispatch(addPaymentMethod(method));

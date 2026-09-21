@@ -1,6 +1,7 @@
 const initialState = {
     isLoading: false,
     errorMessage: null,
+    checkoutLoading: false,
     categoryLoader: false,
     categoryError: null,
     btnLoader: false,
@@ -10,13 +11,13 @@ const errorReducer = (state = initialState, action) => {
     switch (action.type) {
         case "IS_LOADING":
         case "IS_FETCHING":
-            return{
+            return {
                 ...state,
                 isLoading: true,
                 errorMessage: null,
             };
         case "BUTTON_LOADER":
-            return{
+            return {
                 ...state,
                 btnLoader: true,
                 errorMessage: null,
@@ -24,7 +25,7 @@ const errorReducer = (state = initialState, action) => {
             };
 
         case "IS_SUCCESS":
-            return{
+            return {
                 ...state,
                 isLoading: false,
                 errorMessage: null,
@@ -34,7 +35,7 @@ const errorReducer = (state = initialState, action) => {
             };
 
         case "IS_ERROR":
-            return{
+            return {
                 ...state,
                 isLoading: false,
                 errorMessage: action.payload,
@@ -43,17 +44,37 @@ const errorReducer = (state = initialState, action) => {
             };
 
         case "CATEGORY_SUCCESS":
-            return{
+            return {
                 ...state,
                 categoryLoader: false,
                 categoryError: null,
             };
 
         case "CATEGORY_LOADING":
-            return{
+            return {
                 ...state,
                 categoryLoader: true,
                 errorMessage: null,
+            };
+
+        case "CHECKOUT_LOADING":
+            return {
+                ...state,
+                checkoutLoading: true,
+                errorMessage: null,
+            };
+
+        case "CHECKOUT_LOADING_SUCCESS":
+            return {
+                ...state,
+                checkoutLoading: false,
+            };
+
+        case "CHECKOUT_LOADING_ERROR":
+            return {
+                ...state,
+                checkoutLoading: false,
+                errorMessage: action.payload,
             };
 
         default:
